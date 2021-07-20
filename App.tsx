@@ -9,6 +9,7 @@ import AppLoading from "expo-app-loading";
 
 import { CountdownProvider } from "./src/contexts/CountdownContext";
 import { ExercisesScreen } from "./src/screens/ExercisesScreen";
+import { AppProvider } from "./src/contexts/AppContext";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -21,8 +22,10 @@ export default function App() {
   }
 
   return (
-    <CountdownProvider>
-      <ExercisesScreen />
-    </CountdownProvider>
+    <AppProvider>
+      <CountdownProvider>
+        <ExercisesScreen />
+      </CountdownProvider>
+    </AppProvider>
   );
 }

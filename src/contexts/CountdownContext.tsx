@@ -1,5 +1,12 @@
-import React, { createContext, ReactNode, useEffect, useState } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 import constants from "../utils/constants";
+import { AppContext } from "./AppContext";
 
 interface CountdownContextData {
   seconds: number;
@@ -20,9 +27,10 @@ let countdownTimeout: NodeJS.Timeout;
 export const CountdownContext = createContext({} as CountdownContextData);
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
+  const { settings } = useContext(AppContext);
   const [isActive, setIsActive] = useState(false);
   const [isRestMode, setIsRestMode] = useState(false);
-  const [seconds, setSeconds] = useState(constants.SETTINGS.stimulusDuration);
+  const [seconds, setSeconds] = useState(settings.stimulusDuration);
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [currentSeries, setCurrentSeries] = useState(1);
 
@@ -32,7 +40,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   function goToNextExercise() {
     setCurrentItemIndex(currentItemIndex + 1);
-    setSeconds(constants.SETTINGS.stimulusDuration);
+    setSeconds(settings.stimulusDuration);
     setCurrentSeries(1);
     setIsRestMode(false);
   }
@@ -46,12 +54,12 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   function increaseSeries() {
     setIsRestMode(false);
     setCurrentSeries(currentSeries + 1);
-    setSeconds(constants.SETTINGS.stimulusDuration);
+    setSeconds(settings.stimulusDuration);
   }
 
   function goToRestTime() {
     setIsRestMode(true);
-    setSeconds(constants.SETTINGS.restDuration);
+    setSeconds(settings.restDuration);
   }
 
   function resetCountdown() {
@@ -59,7 +67,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setCurrentItemIndex(0);
     setIsActive(false);
     setCurrentSeries(1);
-    setSeconds(constants.SETTINGS.stimulusDuration);
+    setSeconds(settings.stimulusDuration);
     setIsRestMode(false);
   }
 
@@ -69,7 +77,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         countdownTime();
       } else if (!isRestMode) {
         goToRestTime();
-      } else if (currentSeries < constants.SETTINGS.series) {
+      } else if (currentSeries < settings.series) {
         increaseSeries();
       } else {
         goToNextExercise();

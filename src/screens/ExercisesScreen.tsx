@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,13 +6,18 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  Modal,
 } from "react-native";
+
+import { MaterialIcons } from "@expo/vector-icons";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
 import { CurrentExercise } from "../components/CurrentExercise";
 import { Item } from "../components/Item";
 import { CountdownContext } from "../contexts/CountdownContext";
 import constants from "../utils/constants";
+import { SettingsModal } from "../components/SettingsModal";
+import { AppContext } from "../contexts/AppContext";
 
 export function ExercisesScreen() {
   const {
@@ -25,6 +30,8 @@ export function ExercisesScreen() {
     resetCountdown,
   } = useContext(CountdownContext);
 
+  const { settings } = useContext(AppContext);
+
   function renderItem({ item }) {
     const backgroundColor =
       currentItemIndex < constants.EXERCISES.length &&
@@ -35,13 +42,33 @@ export function ExercisesScreen() {
   }
 
   const [secondLeft, secondRight] = String(seconds).padStart(2, "0").split("");
+  const [isModalVisible, setModalVisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
+      <SettingsModal
+        isModalVisible={isModalVisible}
+        setModalVisible={setModalVisible}
+      />
+      <View
+        style={{
+          alignItems: "flex-end",
+          justifyContent: "center",
+          padding: 16,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => {
+            setModalVisible(true);
+          }}
+        >
+          <MaterialIcons name="settings" color={colors.heading} size={24} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.currentContainer}>
         {constants.EXERCISES[currentItemIndex] ? (
           <CurrentExercise
-            title={`${constants.EXERCISES[currentItemIndex].title} (${currentSeries} de ${constants.SETTINGS.series})`}
+            title={`${constants.EXERCISES[currentItemIndex].title} (${currentSeries} de ${settings.series})`}
             isActive={isActive}
             isRestMode={isRestMode}
             time={`00:${secondLeft}${secondRight}`}
