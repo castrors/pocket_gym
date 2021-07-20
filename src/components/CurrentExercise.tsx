@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import colors from "../../../styles/colors";
-import fonts from "../../../styles/fonts";
+import colors from "../../styles/colors";
+import fonts from "../../styles/fonts";
 
 interface CurrentExerciseProps {
   title: string;
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     color: colors.heading,
     fontFamily: fonts.heading,
     marginTop: 20,
-    marginHorizontal: 16
+    marginHorizontal: 16,
   },
   textRestTime: {
     fontSize: 30,
