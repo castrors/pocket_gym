@@ -1,11 +1,20 @@
 {
   "files": {
-    "app.js": "/pocket_gym/static/js/app.01c96ead.chunk.js",
-    "app.js.map": "/pocket_gym/static/js/app.01c96ead.chunk.js.map",
+    "app.js": "/pocket_gym/static/js/app.7b35b391.chunk.js",
+    "app.js.map": "/pocket_gym/static/js/app.7b35b391.chunk.js.map",
     "runtime~app.js": "/pocket_gym/static/js/runtime~app.e2a5bfe8.js",
     "runtime~app.js.map": "/pocket_gym/static/js/runtime~app.e2a5bfe8.js.map",
-    "static/js/2.f05da41f.chunk.js": "/pocket_gym/static/js/2.f05da41f.chunk.js",
-    "static/js/2.f05da41f.chunk.js.map": "/pocket_gym/static/js/2.f05da41f.chunk.js.map",
+    "static/js/2.df1d39d6.chunk.js": "/pocket_gym/static/js/2.df1d39d6.chunk.js",
+    "static/js/2.df1d39d6.chunk.js.map": "/pocket_gym/static/js/2.df1d39d6.chunk.js.map",
+    "fonts/AntDesign.ttf": "/pocket_gym/./fonts/AntDesign.ttf",
+    "fonts/Entypo.ttf": "/pocket_gym/./fonts/Entypo.ttf",
+    "fonts/Feather.ttf": "/pocket_gym/./fonts/Feather.ttf",
+    "fonts/FontAwesome.ttf": "/pocket_gym/./fonts/FontAwesome.ttf",
+    "fonts/FontAwesome5_Brands.ttf": "/pocket_gym/./fonts/FontAwesome5_Brands.ttf",
+    "fonts/FontAwesome5_Solid.ttf": "/pocket_gym/./fonts/FontAwesome5_Solid.ttf",
+    "fonts/Fontisto.ttf": "/pocket_gym/./fonts/Fontisto.ttf",
+    "fonts/Foundation.ttf": "/pocket_gym/./fonts/Foundation.ttf",
+    "fonts/Ionicons.ttf": "/pocket_gym/./fonts/Ionicons.ttf",
     "fonts/Jost_100Thin.ttf": "/pocket_gym/./fonts/Jost_100Thin.ttf",
     "fonts/Jost_100Thin_Italic.ttf": "/pocket_gym/./fonts/Jost_100Thin_Italic.ttf",
     "fonts/Jost_200ExtraLight.ttf": "/pocket_gym/./fonts/Jost_200ExtraLight.ttf",
@@ -24,17 +33,20 @@
     "fonts/Jost_800ExtraBold_Italic.ttf": "/pocket_gym/./fonts/Jost_800ExtraBold_Italic.ttf",
     "fonts/Jost_900Black.ttf": "/pocket_gym/./fonts/Jost_900Black.ttf",
     "fonts/Jost_900Black_Italic.ttf": "/pocket_gym/./fonts/Jost_900Black_Italic.ttf",
+    "fonts/MaterialCommunityIcons.ttf": "/pocket_gym/./fonts/MaterialCommunityIcons.ttf",
+    "fonts/MaterialIcons.ttf": "/pocket_gym/./fonts/MaterialIcons.ttf",
+    "fonts/SimpleLineIcons.ttf": "/pocket_gym/./fonts/SimpleLineIcons.ttf",
     "favicon-16.png": "/pocket_gym/favicon-16.png",
     "favicon-32.png": "/pocket_gym/favicon-32.png",
     "favicon.ico": "/pocket_gym/favicon.ico",
     "index.html": "/pocket_gym/index.html",
     "manifest.json": "/pocket_gym/manifest.json",
     "serve.json": "/pocket_gym/serve.json",
-    "static/js/2.f05da41f.chunk.js.LICENSE.txt": "/pocket_gym/static/js/2.f05da41f.chunk.js.LICENSE.txt"
+    "static/js/2.df1d39d6.chunk.js.LICENSE.txt": "/pocket_gym/static/js/2.df1d39d6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime~app.e2a5bfe8.js",
-    "static/js/2.f05da41f.chunk.js",
-    "static/js/app.01c96ead.chunk.js"
+    "static/js/2.df1d39d6.chunk.js",
+    "static/js/app.7b35b391.chunk.js"
   ]
 }
