@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/pocket_gym/static/js/app.7b35b391.chunk.js",
-    "app.js.map": "/pocket_gym/static/js/app.7b35b391.chunk.js.map",
+    "app.js": "/pocket_gym/static/js/app.0bc6c9d4.chunk.js",
+    "app.js.map": "/pocket_gym/static/js/app.0bc6c9d4.chunk.js.map",
     "runtime~app.js": "/pocket_gym/static/js/runtime~app.e2a5bfe8.js",
     "runtime~app.js.map": "/pocket_gym/static/js/runtime~app.e2a5bfe8.js.map",
-    "static/js/2.df1d39d6.chunk.js": "/pocket_gym/static/js/2.df1d39d6.chunk.js",
-    "static/js/2.df1d39d6.chunk.js.map": "/pocket_gym/static/js/2.df1d39d6.chunk.js.map",
+    "static/js/2.7bcbd67b.chunk.js": "/pocket_gym/static/js/2.7bcbd67b.chunk.js",
+    "static/js/2.7bcbd67b.chunk.js.map": "/pocket_gym/static/js/2.7bcbd67b.chunk.js.map",
     "fonts/AntDesign.ttf": "/pocket_gym/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/pocket_gym/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/pocket_gym/./fonts/Feather.ttf",
@@ -42,11 +42,11 @@
     "index.html": "/pocket_gym/index.html",
     "manifest.json": "/pocket_gym/manifest.json",
     "serve.json": "/pocket_gym/serve.json",
-    "static/js/2.df1d39d6.chunk.js.LICENSE.txt": "/pocket_gym/static/js/2.df1d39d6.chunk.js.LICENSE.txt"
+    "static/js/2.7bcbd67b.chunk.js.LICENSE.txt": "/pocket_gym/static/js/2.7bcbd67b.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime~app.e2a5bfe8.js",
-    "static/js/2.df1d39d6.chunk.js",
-    "static/js/app.7b35b391.chunk.js"
+    "static/js/2.7bcbd67b.chunk.js",
+    "static/js/app.0bc6c9d4.chunk.js"
   ]
 }
