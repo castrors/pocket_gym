@@ -5,7 +5,6 @@ import React, {
   useState,
   useContext,
 } from "react";
-import constants from "../utils/constants";
 import { AppContext } from "./AppContext";
 
 interface CountdownContextData {
@@ -27,7 +26,7 @@ let countdownTimeout: NodeJS.Timeout;
 export const CountdownContext = createContext({} as CountdownContextData);
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
-  const { settings } = useContext(AppContext);
+  const { exercisesList, settings } = useContext(AppContext);
   const [isActive, setIsActive] = useState(false);
   const [isRestMode, setIsRestMode] = useState(false);
   const [seconds, setSeconds] = useState(settings.stimulusDuration);
@@ -72,7 +71,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   }
 
   useEffect(() => {
-    if (isActive && currentItemIndex < constants.EXERCISES.length) {
+    if (isActive && currentItemIndex < exercisesList.length) {
       if (seconds > 0) {
         countdownTime();
       } else if (!isRestMode) {

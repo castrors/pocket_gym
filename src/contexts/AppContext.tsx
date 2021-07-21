@@ -7,9 +7,9 @@ interface Settings {
 }
 
 interface AppContextData {
-  exercisesList: string[];
+  exercisesList: Exercise[];
   settings: Settings;
-  setExercisesList: (exercisesList: string[]) => void;
+  setExercisesList: (exercisesList: Exercise[]) => void;
   setSettings: (settings: Settings) => void;
 }
 
@@ -17,10 +17,30 @@ interface AppProviderProps {
   children: ReactNode;
 }
 
+interface Exercise {
+  title: string;
+}
+
 export const AppContext = createContext({} as AppContextData);
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [exercisesList, setExercisesList] = useState<string[]>([]);
+  const [exercisesList, setExercisesList] = useState<Exercise[]>([
+    {
+      title: "Polichinelo",
+    },
+    {
+      title: "Corrida parada",
+    },
+    {
+      title: "Meio Burpee",
+    },
+    {
+      title: "Polichinelo frontal",
+    },
+    {
+      title: "Abdominal canivete alternado",
+    },
+  ]);
   const [settings, setSettings] = useState<Settings>({
     stimulusDuration: 30,
     series: 5,

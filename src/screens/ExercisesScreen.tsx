@@ -15,9 +15,9 @@ import fonts from "../../styles/fonts";
 import { CurrentExercise } from "../components/CurrentExercise";
 import { Item } from "../components/Item";
 import { CountdownContext } from "../contexts/CountdownContext";
-import constants from "../utils/constants";
 import { SettingsModal } from "../components/SettingsModal";
 import { AppContext } from "../contexts/AppContext";
+import { ExercisesModal } from "../components/ExercisesModal";
 
 export function ExercisesScreen() {
   const {
@@ -30,45 +30,60 @@ export function ExercisesScreen() {
     resetCountdown,
   } = useContext(CountdownContext);
 
-  const { settings } = useContext(AppContext);
+  const { exercisesList, settings } = useContext(AppContext);
 
   function renderItem({ item }) {
     const backgroundColor =
-      currentItemIndex < constants.EXERCISES.length &&
-      item.title === constants.EXERCISES[currentItemIndex].title
+      currentItemIndex < exercisesList.length &&
+      item.title === exercisesList[currentItemIndex].title
         ? colors.green_dark
         : colors.green;
     return <Item title={item.title} backgroundColor={backgroundColor} />;
   }
 
   const [secondLeft, secondRight] = String(seconds).padStart(2, "0").split("");
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [isSettingsModalVisible, setSettingsModalVisible] = useState(false);
+  const [isExercisesModalVisible, setExercisesModalVisible] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
       <SettingsModal
-        isModalVisible={isModalVisible}
-        setModalVisible={setModalVisible}
+        isModalVisible={isSettingsModalVisible}
+        setModalVisible={setSettingsModalVisible}
+      />
+      <ExercisesModal
+        isModalVisible={isExercisesModalVisible}
+        setModalVisible={setExercisesModalVisible}
       />
       <View
         style={{
-          alignItems: "flex-end",
-          justifyContent: "center",
+          justifyContent: "flex-end",
+          flexDirection: "row",
           padding: 16,
         }}
       >
         <TouchableOpacity
+          style={{ margin: 4 }}
           onPress={() => {
-            setModalVisible(true);
+            setExercisesModalVisible(true);
+          }}
+        >
+          <MaterialIcons name="list" color={colors.heading} size={24} />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{ margin: 4 }}
+          onPress={() => {
+            setSettingsModalVisible(true);
           }}
         >
           <MaterialIcons name="settings" color={colors.heading} size={24} />
         </TouchableOpacity>
       </View>
       <View style={styles.currentContainer}>
-        {constants.EXERCISES[currentItemIndex] ? (
+        {exercisesList[currentItemIndex] ? (
           <CurrentExercise
-            title={`${constants.EXERCISES[currentItemIndex].title} (${currentSeries} de ${settings.series})`}
+            title={`${exercisesList[currentItemIndex].title} (${currentSeries} de ${settings.series})`}
             isActive={isActive}
             isRestMode={isRestMode}
             time={`00:${secondLeft}${secondRight}`}
@@ -99,12 +114,11 @@ export function ExercisesScreen() {
       </View>
       <View style={styles.listContainer}>
         <FlatList
-          data={constants.EXERCISES}
+          data={exercisesList}
           renderItem={renderItem}
           keyExtractor={(item) => item.title}
         />
       </View>
-      {/* <StatusBar style="auto" /> */}
     </SafeAreaView>
   );
 }
@@ -116,13 +130,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   currentContainer: {
-    flex: 1,
+    flex: 3,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.green_light,
   },
   listContainer: {
-    flex: 2,
+    flex: 1,
   },
   title: {
     fontSize: 18,

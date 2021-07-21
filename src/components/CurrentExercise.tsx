@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   textTime: {
-    fontSize: 52,
+    fontSize: 64,
     fontFamily: fonts.text,
     color: colors.heading,
   },
