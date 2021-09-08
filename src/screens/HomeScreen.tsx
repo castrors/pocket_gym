@@ -5,6 +5,7 @@ import {
     View,
     SafeAreaView,
     TouchableOpacity,
+    FlatList
 
 } from "react-native";
 
@@ -15,15 +16,88 @@ import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
 import { ActivityCard } from "../components/Home/ActivityCard";
 
-export function HomeScreen({ navigation }) {
+export interface Exercise {
+    title: string;
+}
+
+export interface Settings {
+    stimulusDuration: number,
+    series: number,
+    restDuration: number,
+}
+
+export interface Training {
+    title: string,
+    subtitle: string,
+    time: number,
+    exercises: Exercise[],
+    settings: Settings
+}
+
+const trainings = [
+    {
+        title: "Treino Aeróbico",
+        subtitle: "com Rai Rafaine",
+        time: 18.5,
+        exercises: [
+            {
+                title: "Polichinelo",
+            },
+            {
+                title: "Corrida parada",
+            },
+            {
+                title: "Meio Burpee",
+            },
+            {
+                title: "Polichinelo frontal",
+            },
+            {
+                title: "Abdominal canivete alternado",
+            },
+        ],
+        settings: {
+            stimulusDuration: 30,
+            series: 5,
+            restDuration: 15,
+        }
+    },
+    {
+        title: "Treino FullBody",
+        subtitle: "com Rai Rafaine",
+        time: 20,
+        exercises: [
+            {
+                title: "Agachamento com Avanço",
+            },
+            {
+                title: "Flexão de braços",
+            },
+            {
+                title: "Escalador",
+            },
+            {
+                title: "AbMat",
+            },
+        ],
+        settings: {
+            stimulusDuration: 40,
+            series: 5,
+            restDuration: 20,
+        }
+    },
+]
+
+export function HomeScreen({ ...props }) {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.textTitle}>Escolha seu treino!</Text>
             {/* <ExerciseCard exercise={{}}/> */}
 
-
-            <ActivityCard title={"Aeróbico"} subtitle={"com Rai Rafaine"} duration={25} onPress={() => navigation.navigate('ExercisesScreen')} />
-            <ActivityCard title={"Hiit"} subtitle={"com Rai Rafaine"} duration={30} onPress={() => navigation.navigate('ExercisesScreen')} />
+            <FlatList 
+                data={trainings}
+                renderItem={({item}) => <ActivityCard training={item} onPress={() => props.navigation.navigate('ExercisesScreen', item)} />}
+            />
 
         </SafeAreaView>
     );

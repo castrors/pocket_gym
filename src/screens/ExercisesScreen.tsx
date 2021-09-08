@@ -18,8 +18,9 @@ import { CountdownContext } from "../contexts/CountdownContext";
 import { SettingsModal } from "../components/SettingsModal";
 import { AppContext } from "../contexts/AppContext";
 import { ExercisesModal } from "../components/ExercisesModal";
+import { Training } from "./HomeScreen";
 
-export function ExercisesScreen() {
+export function ExercisesScreen({ ...props }) {
   const {
     seconds,
     isActive,
@@ -30,15 +31,18 @@ export function ExercisesScreen() {
     resetCountdown,
   } = useContext(CountdownContext);
 
-  const { exercisesList, settings } = useContext(AppContext);
+  const training : Training = props.route.params;
 
-  function renderItem({ item }) {
+  const exercisesList = training.exercises;
+  const settings = training.settings;
+
+  function renderItem({ ...props }) {
     const backgroundColor =
       currentItemIndex < exercisesList.length &&
-      item.title === exercisesList[currentItemIndex].title
+        props.item.title === exercisesList[currentItemIndex].title
         ? colors.green_dark
         : colors.green;
-    return <Item title={item.title} backgroundColor={backgroundColor} />;
+    return <Item title={props.item.title} backgroundColor={backgroundColor} />;
   }
 
   const [secondLeft, secondRight] = String(seconds).padStart(2, "0").split("");
