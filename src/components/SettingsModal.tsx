@@ -78,7 +78,7 @@ export function SettingsModal({
               setModalVisible(!isModalVisible);
             }}
           >
-            <Text style={styles.textStyle}>Save</Text>
+            <Text style={styles.textStyle}>Salvar</Text>
           </Pressable>
         </View>
       </View>

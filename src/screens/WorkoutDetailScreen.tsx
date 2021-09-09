@@ -9,6 +9,8 @@ import {
   Modal,
 } from "react-native";
 
+import { Button } from "react-native-paper";
+
 import { MaterialIcons } from "@expo/vector-icons";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
@@ -18,9 +20,11 @@ import { CountdownContext } from "../contexts/CountdownContext";
 import { SettingsModal } from "../components/SettingsModal";
 import { AppContext } from "../contexts/AppContext";
 import { ExercisesModal } from "../components/ExercisesModal";
-import { Training } from "./HomeScreen";
+import { Workout } from "./HomeScreen";
+import { ExerciseDescriptionCard } from "../components/WorkoutDetail/ExerciseDescriptionCard";
+import { exerciseDurationInMin, workoutDurationInMin } from "../utils/Utils";
 
-export function ExercisesScreen({ ...props }) {
+export function WorkoutDetailScreen({ ...props }) {
   const {
     seconds,
     isActive,
@@ -31,15 +35,15 @@ export function ExercisesScreen({ ...props }) {
     resetCountdown,
   } = useContext(CountdownContext);
 
-  const training : Training = props.route.params;
+  const workout: Workout = props.route.params;
 
-  const exercisesList = training.exercises;
-  const settings = training.settings;
+  const exercisesList = workout.exercises;
+  const settings = workout.settings;
 
   function renderItem({ ...props }) {
     const backgroundColor =
       currentItemIndex < exercisesList.length &&
-        props.item.title === exercisesList[currentItemIndex].title
+      props.item.title === exercisesList[currentItemIndex].title
         ? colors.green_dark
         : colors.green;
     return <Item title={props.item.title} backgroundColor={backgroundColor} />;
@@ -55,24 +59,21 @@ export function ExercisesScreen({ ...props }) {
         isModalVisible={isSettingsModalVisible}
         setModalVisible={setSettingsModalVisible}
       />
-      <ExercisesModal
-        isModalVisible={isExercisesModalVisible}
-        setModalVisible={setExercisesModalVisible}
-      />
+
       <View
         style={{
-          justifyContent: "flex-end",
+          justifyContent: "space-between",
           flexDirection: "row",
-          padding: 16,
+          paddingVertical: 16,
         }}
       >
         <TouchableOpacity
           style={{ margin: 4 }}
           onPress={() => {
-            setExercisesModalVisible(true);
+            props.navigation.goBack();
           }}
         >
-          <MaterialIcons name="list" color={colors.heading} size={24} />
+          <MaterialIcons name="arrow-back" color={colors.heading} size={24} />
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -81,45 +82,42 @@ export function ExercisesScreen({ ...props }) {
             setSettingsModalVisible(true);
           }}
         >
-          <MaterialIcons name="settings" color={colors.heading} size={24} />
+          <MaterialIcons
+            name="fitness-center"
+            color={colors.heading}
+            size={24}
+          />
         </TouchableOpacity>
       </View>
-      <View style={styles.currentContainer}>
-        {exercisesList[currentItemIndex] ? (
-          <CurrentExercise
-            title={`${exercisesList[currentItemIndex].title} (${currentSeries} de ${settings.series})`}
-            isActive={isActive}
-            isRestMode={isRestMode}
-            time={`00:${secondLeft}${secondRight}`}
-            onClick={() => {
-              if (isActive) {
-                resetCountdown();
-              } else {
-                startCountdown();
-              }
-            }}
-          />
-        ) : (
-          <View>
-            <Text style={styles.textTitle}>
-              Parabéns, treino concluído com sucesso!
-            </Text>
-
-            <TouchableOpacity
-              style={styles.buttonContainer}
-              onPress={() => {
-                resetCountdown();
-              }}
-            >
-              <Text style={styles.title}>Reiniciar</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
+      <Text style={styles.textTitle}>Aeróbico</Text>
+      <Text style={styles.subtitle}>{workoutDurationInMin(workout)} min.</Text>
+      <Button
+        icon="run"
+        mode="contained"
+        onPress={() =>
+          props.navigation.navigate("ActivityScreen", workout)
+        }
+        style={{
+          alignSelf: "center",
+          width: 120,
+          margin: 8,
+        }}
+        uppercase={false}
+      >
+        Começar
+      </Button>
       <View style={styles.listContainer}>
         <FlatList
           data={exercisesList}
-          renderItem={renderItem}
+          renderItem={({ item }) => (
+            <ExerciseDescriptionCard
+              exercise={item}
+              settings={settings}
+              onPress={() =>
+                props.navigation.navigate("WorkoutDetailScreen", item)
+              }
+            />
+          )}
           keyExtractor={(item) => item.title}
         />
       </View>
@@ -151,9 +149,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 32,
     textAlign: "center",
-    color: colors.heading,
+    color: colors.black,
     fontFamily: fonts.heading,
     marginTop: 20,
+  },
+  subtitle: {
+    fontSize: 16,
+    textAlign: "center",
+    color: colors.heading,
+    fontFamily: fonts.text,
   },
   buttonContainer: {
     height: 56,

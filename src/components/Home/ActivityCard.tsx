@@ -1,29 +1,37 @@
 import React from "react";
-import { View, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native";
 import { Card, Button } from "react-native-paper";
-import { Training } from "../../screens/HomeScreen";
+import { Workout } from "../../screens/HomeScreen";
+import { workoutDurationInMin } from "../../utils/Utils";
 
 interface ActivityCardProps {
-    training: Training;
-    onPress: () => void;
+  workout: Workout;
+  onPress: () => void;
 }
 
-export function ActivityCard({ training, onPress }: ActivityCardProps) {
-    return (
-        <View style={styles.container}>
-            <Card>
-                <Card.Title title={training.title} subtitle={training.subtitle} />
-                <Card.Actions>
-                    <Button icon="play" mode="contained" onPress={onPress} uppercase={false}>{training.time}min</Button>
-                </Card.Actions>
-            </Card>
-        </View>
-    );
+export function ActivityCard({ workout, onPress }: ActivityCardProps) {
+  return (
+    <View style={styles.container}>
+      <Card>
+        <Card.Title title={workout.title} subtitle={workout.subtitle} />
+        <Card.Actions>
+          <Button
+            icon="play"
+            mode="contained"
+            onPress={onPress}
+            uppercase={false}
+          >
+            {workoutDurationInMin(workout)}min
+          </Button>
+        </Card.Actions>
+      </Card>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        marginHorizontal: 8,
-        marginTop: 8,
-    },
+  container: {
+    marginHorizontal: 8,
+    marginTop: 8,
+  },
 });
